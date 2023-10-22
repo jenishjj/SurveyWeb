@@ -1,0 +1,60 @@
+<div style="padding-top: 20px">
+  <div class="form-main-card">
+    <!-- <div *ngFor="let page of mainForm.pages"> -->
+    <div>
+      <div>
+        <h2>{{currentPage.pageTitle}}</h2>
+      </div>
+      <div *ngFor="let item of currentPage.questions">
+        <div>
+          <label>{{item.title}}</label>
+          <div [ngSwitch]="item.questionType.type">
+            <div *ngSwitchCase="'text'">
+              <mat-form-field appearance="outline" class="w-100">
+                <input matInput [placeholder]="'Enter ' + item.title" [(ngModel)]="formRecord.queRecords[item.id]">
+              </mat-form-field>
+            </div>
+            <div *ngSwitchCase="'textarea'">
+              <mat-form-field appearance="outline" class="w-100">
+                <textarea matInput [placeholder]="'Enter ' + item.title"
+                  [(ngModel)]="formRecord.queRecords[item.id]"></textarea>
+              </mat-form-field>
+            </div>
+            <div *ngSwitchCase="'dropdown'">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-select [(ngModel)]="formRecord.queRecords[item.id]" [placeholder]="'Select ' + item.title">
+                  <mat-option *ngFor="let option of item.optionsArr" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div *ngSwitchCase="'checkbox'">
+              <mat-selection-list [(ngModel)]="formRecord.queRecords[item.id]" color="primary" class="w-100">
+                <mat-list-option *ngFor="let option of item.optionsArr" [value]="option">
+                  {{option}}
+                </mat-list-option>
+              </mat-selection-list>
+            </div>
+            <div *ngSwitchCase="'radio'">
+              <mat-radio-group [(ngModel)]="formRecord.queRecords[item.id]" color="primary" class="w-100">
+                <mat-radio-button *ngFor="let option of item.optionsArr" [value]="option">
+                  {{option}}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div *ngSwitchDefault>
+              <mat-form-field appearance="outline" class="w-100">
+                <input matInput [placeholder]="'Enter ' + item.title" [(ngModel)]="formRecord.queRecords[item.id]">
+              </mat-form-field>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="btn-container">
+      <button mat-flat-button color="primary" (click)="submit()">{{showSaveButton ? 'Save' : 'Next'}}</button>
+    </div>
+  </div>
+</div>

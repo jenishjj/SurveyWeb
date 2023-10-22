@@ -1,0 +1,17 @@
+<div style="padding-top: 20px">
+  <div class="form-main-card">
+    <div *ngFor="let page of mainForm.pages">
+      <div>
+        <h2>{{page.pageTitle}}</h2>
+      </div>
+      <div *ngFor="let item of page.questions" style="margin-bottom: 10px">
+        <div>
+          <label><b>{{item.title}}</b></label>
+          <div>
+            {{formRecord.queRecords[item.id]}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
